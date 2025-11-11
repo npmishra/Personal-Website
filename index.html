@@ -4,42 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Narayan Mishra — Personal Website</title>
+
+<!-- Bootstrap CSS from CDN -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Icons CDN -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-<style>
-  :root { --primary: #6366f1; --gradient: linear-gradient(135deg, #6366f1, #06b6d4); }
-  body { font-family: 'Poppins', sans-serif; background: #f8fafc; color: #1e293b; }
-  nav.navbar { background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); }
-  nav .nav-link.active { font-weight: 600; color: var(--primary) !important; }
 
-  .hero {
-    min-height: 90vh;
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, #eef2ff, #f0fdfa);
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: ''; position: absolute; width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(99,102,241,0.2), transparent 70%);
-    top: -50px; left: -50px; border-radius: 50%;
-  }
-  .hero::after {
-    content: ''; position: absolute; width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(6,182,212,0.15), transparent 70%);
-    bottom: -100px; right: -100px; border-radius: 50%;
-  }
-  .hero-content { position: relative; text-align: center; z-index: 2; animation: fadeUp 1.2s ease-out; }
-  .hero img { width: 220px; height: 220px; object-fit: cover; border-radius: 50%; border: 5px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-  .hero img:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
-  .hero h1 { font-size: 2.5rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; color: transparent; }
-  .hero p { color: #475569; max-width: 600px; margin: 1rem auto; }
-  @keyframes fadeUp { from {opacity: 0; transform: translateY(40px);} to {opacity: 1; transform: translateY(0);} }
+<!-- Local CSS -->
+<link rel="stylesheet" href="./css/style.css">
 
-  .about-section img { border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-  footer { background: #0f172a; color: #cbd5e1; text-align: center; padding: 2rem 0; margin-top: 3rem; }
-  .btn-primary { background: var(--primary); border: none; }
-  .btn-primary:hover { background: #4f46e5; }
-</style>
 </head>
 <body data-bs-theme="light">
 
@@ -63,6 +37,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
 // ----- GitHub Pages base path -----
 const basePath = window.location.hostname.includes('github.io') ? '/Personal-Website/' : './';
