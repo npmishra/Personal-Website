@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — npmishra</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">npmishra</a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html" class="active btn-contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Get in touch</h1>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Contact Info</h3>
+        <p><strong>Email:</strong> <a href="mailto:narayanmishra2027@gmail.com">narayanmishra2027@gmail.com</a></p>
+        <p><strong>Mobile:</strong> 9867549675</p>
+        <p><strong>Location:</strong> Butwal-12, Nayagaun, Rupandehi, Nepal</p>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <label>Name</label>
+        <input type="text" id="name" required />
+        <label>Email</label>
+        <input type="email" id="email" required />
+        <label>Message</label>
+        <textarea id="message" rows="6" required></textarea>
+        <button class="btn primary" type="submit">Send Message</button>
+        <p id="formMsg" class="muted" aria-live="polite"></p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>npmishra — Butwal, Nepal</div>
+      <div><a href="mailto:narayanmishra2027@gmail.com">Email</a></div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

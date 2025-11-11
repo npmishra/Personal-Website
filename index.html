@@ -1,202 +1,119 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Narayan Mishra — Personal Website</title>
-
-<!-- Bootstrap CSS from CDN (keep CDN, works globally) -->
-<link id="bootstrap-css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap Icons CDN -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
-<!-- Optional local CSS for overrides -->
-<link id="local-css" rel="stylesheet" href="./css/style.css">
-
-<style>
-:root { --primary: #6366f1; --gradient: linear-gradient(135deg, #6366f1, #06b6d4); }
-body { font-family: 'Poppins', sans-serif; background: #f8fafc; color: #1e293b; }
-nav.navbar { background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); }
-nav .nav-link.active { font-weight: 600; color: var(--primary) !important; }
-
-.hero { min-height: 90vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #eef2ff, #f0fdfa); position: relative; overflow: hidden; }
-.hero::before { content: ''; position: absolute; width: 300px; height: 300px; background: radial-gradient(circle, rgba(99,102,241,0.2), transparent 70%); top: -50px; left: -50px; border-radius: 50%; }
-.hero::after { content: ''; position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(6,182,212,0.15), transparent 70%); bottom: -100px; right: -100px; border-radius: 50%; }
-.hero-content { position: relative; text-align: center; z-index: 2; animation: fadeUp 1.2s ease-out; }
-.hero img { width: 220px; height: 220px; object-fit: cover; border-radius: 50%; border: 5px solid white; box-shadow: 0 8px 20px rgba(0,0,0,0.15); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.hero img:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
-.hero h1 { font-size: 2.5rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; color: transparent; }
-.hero p { color: #475569; max-width: 600px; margin: 1rem auto; }
-@keyframes fadeUp { from {opacity: 0; transform: translateY(40px);} to {opacity: 1; transform: translateY(0);} }
-
-.about-section img { border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-footer { background: #0f172a; color: #cbd5e1; text-align: center; padding: 2rem 0; margin-top: 3rem; }
-.btn-primary { background: var(--primary); border: none; }
-.btn-primary:hover { background: #4f46e5; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>npmishra — Portfolio</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="favicon.ico">
 </head>
-<body data-bs-theme="light">
-
-<nav class="navbar navbar-expand-lg shadow-sm fixed-top">
-  <div class="container">
-    <a class="navbar-brand fw-bold text-primary" href="#/">Narayan Mishra</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0" id="menuLinks"></ul>
-      <button class="btn btn-outline-primary ms-3" id="themeToggle"><i class="bi bi-moon"></i></button>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">npmishra</a>
+      <nav class="nav" id="nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html" class="btn-contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="toggle navigation">☰</button>
     </div>
-  </div>
-</nav>
+  </header>
 
-<main class="container my-5 pt-5" id="app"></main>
-
-<footer>
-  <small>© <span id="year"></span> Narayan Mishra | Built with ❤️</small>
-</footer>
-
-<!-- Bootstrap JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-// ----- GitHub Pages base path -----
-const basePath = window.location.hostname.includes('github.io') ? '/Personal-Website/' : './';
-
-// ----- SITE DATA -----
-const SERVICES = [
-  {title:'Web Design',desc:'Responsive modern UI design for all devices.',icon:'bi-laptop'},
-  {title:'Frontend Development',desc:'Clean, optimized, and accessible web development using HTML, CSS, JS, and Bootstrap.',icon:'bi-code-slash'},
-  {title:'Branding',desc:'Logo design, brand identity, and creative visuals.',icon:'bi-award'}
-];
-const BLOGS = [
-  {title:'My Portfolio Redesign',date:'2025-05-12',excerpt:'How I redesigned my website with modern UI principles and accessibility in mind.'},
-  {title:'Design Systems 101',date:'2025-03-14',excerpt:'Creating scalable and consistent design systems for large web projects.'}
-];
-const MENU = [
-  {path:'/',label:'Home'},
-  {path:'/about',label:'About'},
-  {path:'/services',label:'Services'},
-  {path:'/blog',label:'Blog'},
-  {path:'/contact',label:'Contact'}
-];
-
-// ----- ROUTER -----
-function buildMenu(){
-  const menu = document.getElementById('menuLinks');
-  menu.innerHTML = MENU.map(m=>`<li class="nav-item"><a class="nav-link" href="#${m.path}" data-path="${m.path}">${m.label}</a></li>`).join('');
-}
-
-function router(){
-  const path = location.hash.replace('#','')||'/';
-  document.querySelectorAll('.nav-link').forEach(a=>a.classList.remove('active'));
-  const active = document.querySelector(`.nav-link[data-path='${path}']`);
-  if(active) active.classList.add('active');
-  const pages = {
-    '/': renderHome,
-    '/about': renderAbout,
-    '/services': renderServices,
-    '/blog': renderBlog,
-    '/contact': renderContact
-  };
-  (pages[path]||renderNotFound)();
-}
-
-// ----- PAGES -----
-function renderHome(){
-  document.getElementById('app').innerHTML = `
+  <main>
     <section class="hero">
-      <div class="hero-content text-center">
-        <img src="${basePath}images/myphoto.jpg" alt="Narayan Mishra Photo" class="mb-3">
-        <h1>Hi, I'm Narayan Mishra</h1>
-        <p>Frontend Developer & Designer passionate about creating unique, performant, and delightful digital experiences.</p>
-        <a href="#/services" class="btn btn-primary btn-lg me-2">View Services</a>
-        <a href="#/contact" class="btn btn-outline-primary btn-lg">Contact Me</a>
-      </div>
-    </section>
-  `;
-}
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <h1>Hi — I'm <span class="accent">Narayan Prasad Mishra</span></h1>
+          <p class="lead">Creative Web Designer & Developer • Butwal-12, Nayagaun, Rupandehi, Nepal</p>
+          <p class="hero-cta">
+            <a class="btn primary" href="contact.html">Hire Me</a>
+            <a class="btn ghost" href="about.html">About Me</a>
+          </p>
+          <ul class="stats">
+            <li><strong>5+</strong> Projects</li>
+            <li><strong>3</strong> Certificates</li>
+            <li><strong>100%</strong> HTML & CSS</li>
+          </ul>
+        </div>
 
-function renderAbout(){
-  document.getElementById('app').innerHTML = `
-    <section class="row align-items-center about-section py-5">
-      <div class="col-md-5 text-center mb-4 mb-md-0">
-        <img src="${basePath}images/myphoto.jpg" alt="Narayan Mishra" class="img-fluid">
-      </div>
-      <div class="col-md-7">
-        <h2 class="fw-bold text-primary">About Me</h2>
-        <p>I am a creative developer who enjoys turning ideas into reality using code. My goal is to build web experiences that are both visually stunning and highly functional.</p>
-        <p>With experience in UI/UX design, responsive front-end development, and brand strategy, I bridge the gap between design and technology.</p>
-      </div>
-    </section>
-  `;
-}
-
-function renderServices(){
-  document.getElementById('app').innerHTML = `
-    <section>
-      <h2 class="fw-bold text-primary mb-4">Services</h2>
-      <div class="row g-4">
-        ${SERVICES.map(s=>`
-          <div class="col-md-4">
-            <div class="card h-100 text-center p-4 border-0 shadow-sm">
-              <i class="bi ${s.icon} text-primary fs-1 mb-3"></i>
-              <h5>${s.title}</h5>
-              <p class="text-muted">${s.desc}</p>
+        <div class="hero-right">
+          <div class="profile-card">
+            <div class="profile-photo" style="background-image: url('images/profile.jpg')"></div>
+            <div class="profile-info">
+              <h3>Narayan Prasad Mishra</h3>
+              <p>Web Developer — Butwal, Nepal</p>
+              <div class="socials">
+                <a href="#" aria-label="facebook">f</a>
+                <a href="#" aria-label="twitter">t</a>
+                <a href="#" aria-label="linkedin">in</a>
+              </div>
             </div>
-          </div>`).join('')}
+          </div>
+        </div>
       </div>
     </section>
-  `;
-}
 
-function renderBlog(){
-  document.getElementById('app').innerHTML = `
-    <section>
-      <h2 class="fw-bold text-primary mb-4">Blog</h2>
-      ${BLOGS.map(b=>`
-        <div class="card my-3 border-0 shadow-sm p-4">
-          <h5>${b.title}</h5>
-          <small class="text-muted">${b.date}</small>
-          <p>${b.excerpt}</p>
-        </div>`).join('')}
+    <section class="features container">
+      <h2 class="section-title">What I do</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon">💻</div>
+          <h3>Web Development</h3>
+          <p>Clean, responsive websites built with HTML, CSS and JavaScript. Fast and accessible.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon">🎨</div>
+          <h3>Web & Graphic Design</h3>
+          <p>Modern UIs, branding and graphics that match your identity and purpose.</p>
+        </article>
+        <article class="card">
+          <div class="card-icon">📸</div>
+          <h3>Photography</h3>
+          <p>Event & portrait photography — available for hires and personal shoots.</p>
+        </article>
+      </div>
     </section>
-  `;
-}
 
-function renderContact(){
-  document.getElementById('app').innerHTML = `
-    <section class="py-5">
-      <h2 class="fw-bold text-primary mb-4">Contact Me</h2>
-      <form class="row g-3">
-        <div class="col-md-6"><input type="text" class="form-control" placeholder="Your Name" required></div>
-        <div class="col-md-6"><input type="email" class="form-control" placeholder="Your Email" required></div>
-        <div class="col-12"><textarea class="form-control" rows="4" placeholder="Your Message" required></textarea></div>
-        <div class="col-12"><button class="btn btn-primary btn-lg">Send Message</button></div>
-      </form>
+    <section class="work container" id="work">
+      <h2 class="section-title">Recent Work</h2>
+      <div class="work-grid">
+        <div class="work-item" style="background-image:url('images/img-1.jpg')">
+          <div class="work-overlay">
+            <h4>Project 01</h4>
+            <p>Photography</p>
+          </div>
+        </div>
+        <div class="work-item" style="background-image:url('images/img-2.jpg')">
+          <div class="work-overlay">
+            <h4>Project 02</h4>
+            <p>Web Design</p>
+          </div>
+        </div>
+        <div class="work-item" style="background-image:url('images/img-3.jpg')">
+          <div class="work-overlay">
+            <h4>Project 03</h4>
+            <p>Web Dev</p>
+          </div>
+        </div>
+      </div>
     </section>
-  `;
-}
+  </main>
 
-function renderNotFound(){
-  document.getElementById('app').innerHTML = `<section><h2>404 - Page Not Found</h2></section>`;
-}
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>npmishra</strong> — Butwal, Nepal
+        <p class="muted">© <span id="year"></span> All rights reserved</p>
+      </div>
+      <div>
+        <a href="mailto:narayanmishra2027@gmail.com">narayanmishra2027@gmail.com</a>
+      </div>
+    </div>
+  </footer>
 
-// ----- INIT -----
-function init(){
-  buildMenu();
-  window.addEventListener('hashchange', router);
-  window.addEventListener('load', () => {
-    router();
-    document.getElementById('year').innerText = new Date().getFullYear();
-  });
-  document.getElementById('themeToggle').addEventListener('click', ()=>{
-    const cur = document.documentElement.getAttribute('data-bs-theme') || 'light';
-    document.documentElement.setAttribute('data-bs-theme', cur==='light'?'dark':'light');
-  });
-}
-init();
-</script>
+  <script src="js/main.js"></script>
 </body>
 </html>
